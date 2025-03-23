@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to your CSS file -->
+</head>
+
+<body>
+  <h1>My Projects</h1>
+  <ul>
+    {% for project in projects %}
+    <li>
+      <h2>{{ project.title }}</h2>
+      <p>{{ project.description }}</p>
+      {% if project.image %}
+      <img src="{{ project.image.url }}" alt="{{ project.title }}" style="max-width: 300px;">
+      {% endif %}
+      {% if project.url %}
+      <a href="{{ project.url }}" target="_blank">View Project</a>
+      {% endif %}
+    </li>
+    {% empty%}
+    <p>No projects found</p>
+    {% endfor %}
+  </ul>
+</body>
+
+</html>
