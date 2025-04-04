@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Abdul Kareem{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="jumbotron text-center glassmorphism p-5">
+    <h1 class="display-4 fw-bold text-primary">Welcome to My Portfolio</h1>
+    <p class="lead text-muted">I'm Abdul Kareem, a passionate Django Developer.</p>
+    <a class="btn btn-lg btn-style" href="{% url 'projects' %}" role="button">
+        <i class="fas fa-laptop-code"></i> View My Projects
+    </a>
+</div>
+
+<!-- Recent Projects Section -->
+<h2 class="text-center mt-5 text-primary"><i class="fas fa-folder-open"></i> Recent Projects</h2>
+<div class="row mt-4">
+    {% for project in projects %}
+    <div class="col-md-4">
+        <div class="card project-card shadow-sm">
+            {% if project.image %}
+            <a href="{% url 'project_detail' project.pk %}">
+                <img src="{{ project.image.url }}" class="card-img-top project-image" alt="{{ project.title }}">
+            </a>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title text-dark fw-bold">{{ project.title }}</h5>
+                <p class="card-text text-muted">{{ project.description|truncatewords:20 }}</p>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ project.github_link }}" class="btn btn-sm btn-outline-dark" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    {% if project.demo_link %}
+                    <a href="{{ project.demo_link }}" class="btn btn-sm btn-outline-primary" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> Live Demo
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted text-center">No projects have been added yet.</p>
+    {% endfor %}
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Glassmorphism Hero Section */
+    .glassmorphism {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glassmorphism:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button Styling */
+    .btn-style {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        font-size: 1.2rem;
+        padding: 12px 25px;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-style:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #0056b3, #003a75);
+    }
+
+    /* Project Cards */
+    .project-card {
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Project Image */
+    .project-image {
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+{% endblock %}

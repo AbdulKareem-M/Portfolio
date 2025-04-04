@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Contact Messages{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card border-0 shadow-sm p-4 glassmorphism">
+        <h2 class="text-primary"><i class="fas fa-envelope"></i> Contact Messages</h2>
+
+        {% if messages_list %}
+            <ul class="list-group mt-3">
+                {% for msg in messages_list %}
+                <li class="list-group-item message-card">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <strong class="text-dark">{{ msg.name }}</strong> 
+                            <span class="text-muted">({{ msg.email }})</span><br>
+                            <p class="text-secondary mt-2">{{ msg.message }}</p>
+                        </div>
+                        <i class="fas fa-comment-alt text-primary fs-4"></i>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted mt-3">No messages received yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Glassmorphism Effect */
+    .glassmorphism {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glassmorphism:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Message Cards */
+    .message-card {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        padding: 15px;
+        transition: transform 0.2s ease;
+    }
+
+    .message-card:hover {
+        transform: scale(1.02);
+        background: #f8f9fa;
+    }
+</style>
+{% endblock %}

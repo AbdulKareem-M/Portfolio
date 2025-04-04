@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} - Project Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Project Header -->
+    <h1 class="mb-4 text-primary fw-bold">{{ project.title }}</h1>
+
+    <!-- Project Image -->
+    {% if project.image %}
+    <div class="text-center">
+        <img src="{{ project.image.url }}" class="img-fluid project-image mb-4 shadow-sm" alt="{{ project.title }}">
+    </div>
+    {% endif %}
+
+    <!-- Project Description -->
+    <p class="lead"><strong>Description:</strong> {{ project.description }}</p>
+    <p class="text-muted"><strong>Tech Stack:</strong> {{ project.tech_stack }}</p>
+
+    <!-- Action Buttons -->
+    <div class="d-flex gap-3">
+        {% if project.github_link %}
+        <a href="{{ project.github_link }}" class="btn btn-outline-dark btn-lg project-btn" target="_blank">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+        {% endif %}
+        {% if project.demo_link %}
+        <a href="{{ project.demo_link }}" class="btn btn-outline-primary btn-lg project-btn" target="_blank">
+            <i class="fas fa-play-circle"></i> Live Demo
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Project Image Styling */
+    .project-image {
+        border-radius: 12px;
+        max-width: 80%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-image:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Project Buttons */
+    .project-btn {
+        border-radius: 8px;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .project-btn:hover {
+        transform: translateY(-3px);
+    }
+</style>
+{% endblock %}

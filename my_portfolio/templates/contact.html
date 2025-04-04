@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card border-0 shadow-sm p-4 glassmorphism">
+        <h2 class="text-primary text-center"><i class="fas fa-envelope"></i> Contact Me</h2>
+        <p class="text-muted text-center">I'd love to hear from you. Fill out the form below!</p>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control input-style" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control input-style" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control input-style" id="message" name="message" rows="4" required></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg btn-style">
+                    <i class="fas fa-paper-plane"></i> Send
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Glassmorphism Card */
+    .glassmorphism {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glassmorphism:hover {
+        transform: translateY(-3px);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Input Styling */
+    .input-style {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        border: 1px solid #ced4da;
+    }
+
+    .input-style:focus {
+        border-color: #007bff;
+        box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Button Styling */
+    .btn-style {
+        border-radius: 25px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-style:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
