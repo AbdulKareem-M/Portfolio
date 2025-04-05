@@ -60,16 +60,19 @@ def contact(request):
           f'Message from {name}',
           message,
           settings.DEFAULT_FROM_EMAIL,
-          ['abdulkareemyuseph@example.com'],
+          ['abdulkareemyuseph@gmail.com'],
           fail_silently=False,
         )
         messages.success(request, 'Your message has been sent successfully!')
-        return redirect('contact')
+        return redirect('message_success')
       except Exception:
         messages.error(request, 'Failed to send message. Please try again later.')
   return render(request, 'contact.html')
 
-# Contact Messages Page View
+
+def message_success(request):
+    return render(request, 'message_success.html')
+
 def contact_messages(request):
   messages_list = ContactMessage.objects.all().order_by('-created_at')
   return render(request, 'contact_messages.html', {'messages_list': messages_list})

@@ -12,6 +12,7 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('contact-messages/', views.contact_messages, name='contact_messages'),
     path('project/<int:pk>/', views.ProjectDetailView.as_view(), name='project_detail'),
+    path('message_success/', views.message_success, name='message_success'),
 
 ]
 
