@@ -6,7 +6,7 @@ from django.conf import settings
 from django.views.generic import DetailView
 
 def home(request):
-  projects = Project.objects.all()[:3]
+  projects = Project.objects.all().order_by('-created_at')[:3]  # Get the latest 3 projects
   return render(request, 'home.html',{'projects':projects})
 
 
